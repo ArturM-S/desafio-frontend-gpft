@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { AuthContext } from '../contexts/AuthContext';
 import {
     Container,
     LoginBox,
@@ -10,35 +11,23 @@ import {
 import { Button } from '../components/Global/Button';
 import { Input } from '../components/Global/Input';
 
-interface SignFormData {
-    login: string;
-}
-
 export default function Home() {
-    const { push } = useRouter();
     const { register, handleSubmit } = useForm();
-    const [users, setUsers] = useState([]);
+    const [login, setLogin] = useState('');
+    const { signIn } = useContext(AuthContext);
 
-    fetch('https://jsonplaceholder.typicode.com/users')
-        .then(res => res.json())
-        .then(json => setUsers(json));
-    console.log(users);
-    {
-        const handleSignIn = users.map(user => user.email);
-        if (handleSignIn.includes(register)) {
-            push('/Feed');
-        }
-    }
+    const onSubmit = () => signIn({ login });
 
     return (
         <Container>
+            <LoginFormTitle>Login</LoginFormTitle>
             <LoginBox>
-                <LoginForm onSubmit={handleSubmit(handleSignIn)}>
-                    <LoginFormTitle>Login</LoginFormTitle>
+                <LoginForm onSubmit={handleSubmit(onSubmit)}>
                     <Input
                         name="login"
-                        placeholder="Insira seu email ou nome de usuário"
-                        label="Email ou Nome de Usuário"
+                        placeholder="Insira seu email"
+                        label="Email"
+                        onChange={e => setLogin(e.target.value)}
                         register={register}
                         required
                     />

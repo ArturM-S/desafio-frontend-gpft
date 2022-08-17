@@ -13,6 +13,7 @@ export const globalStyles = (
                 font-family: 'Poppins', sans-serif;
                 font-size: 16px;
                 line-height: 200%;
+                background-color: #222;
             }
         `}
     />

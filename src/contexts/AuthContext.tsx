@@ -1,41 +1,68 @@
-import { createContext, useState } from 'react';
+/* eslint-disable react/jsx-no-constructed-context-values */
+import { useRouter } from 'next/router';
+import { createContext, ReactNode, useEffect, useState } from 'react';
 
 type ISignInData = {
     login: string;
-    password: string;
 };
 
 interface AuthContextData {
     signIn: (credentials: ISignInData) => Promise<void>;
-    signOut: () => void;
     isLoading: boolean;
     isAuthenticated: boolean;
+    permission: boolean;
+}
+
+interface AuthProviderProps {
+    children: ReactNode;
 }
 
 export const AuthContext = createContext({} as AuthContextData);
 
-export const AuthProvider: React.FC = ({ children }) => {
+export function AuthProvider({ children }: AuthProviderProps) {
+    const { push } = useRouter();
     const [isLoading, setIsLoading] = useState(false);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [users, setUsers] = useState([]);
+    const [permission, setPermission] = useState(false);
+    const [username, setUsername] = useState('');
 
     const signIn = async (credentials: ISignInData) => {
-        useEffect(() => {
-            fetch('https://fakestoreapi.com/products/category/electronics')
-                .then(res => res.json())
-                .then(json => setElectronics(json));
-        }, []);
         setIsLoading(true);
+
+        fetch('https://jsonplaceholder.typicode.com/users')
+            .then(res => res.json())
+            .then(json => setUsers(json));
+        setUsername(credentials.login);
+
+        if (users.map(user => user.email).includes(credentials.login)) {
+            push('/Feed');
+        } else {
+            alert('Usuário não encontrado');
+        }
         setIsAuthenticated(true);
         setIsLoading(false);
     };
-    const signOut = () => {
-        setIsAuthenticated(false);
-    };
+
+    useEffect(() => {
+        const handlePermission = async (login: string) => {
+            if (login.includes('.tv')) {
+                console.log(
+                    "🚀 ~ file: AuthContext.tsx ~ line 50 ~ handlePermission ~ login.includes('.tv')",
+                    login.includes('.tv'),
+                );
+                setPermission(true);
+            } else {
+                setPermission(false);
+            }
+        };
+        handlePermission(username);
+    }, [users]);
     return (
         <AuthContext.Provider
-            value={{ signIn, signOut, isLoading, isAuthenticated }}
+            value={{ signIn, isLoading, isAuthenticated, permission }}
         >
             {children}
         </AuthContext.Provider>
     );
-};
+}

@@ -15,8 +15,9 @@ export const LoginBox = styled.div`
     justify-content: center;
     gap: 8px;
     border-radius: 5px;
-    background-color: #222;
+    background-color: #3b3b3b;
     padding: 16px;
+    border: 1px solid #515151;
 `;
 
 export const LoginForm = styled.form`
