@@ -37,6 +37,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
         if (users.map(user => user.email).includes(credentials.login)) {
             push('/Feed');
+            setIsAuthenticated(true);
         } else {
             alert('Usuário não encontrado');
         }
@@ -47,15 +48,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
     useEffect(() => {
         const handlePermission = async (login: string) => {
             if (login.includes('.tv')) {
-                console.log(
-                    "🚀 ~ file: AuthContext.tsx ~ line 50 ~ handlePermission ~ login.includes('.tv')",
-                    login.includes('.tv'),
-                );
                 setPermission(true);
             } else {
                 setPermission(false);
-                push('/');
-                alert('Você precisa fazeer login com um email');
             }
         };
         handlePermission(username);

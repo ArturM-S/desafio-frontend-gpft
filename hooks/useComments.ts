@@ -18,8 +18,8 @@ export async function getComments(
     const response = await fetch(
         `https://jsonplaceholder.typicode.com/posts/${postId}/comments`,
     );
-    const comment = await response.json();
-    return comment;
+    const comments = await response.json();
+    return comments;
 }
 
 export function useComments(postId?: number) {

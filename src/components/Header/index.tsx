@@ -10,7 +10,9 @@ export default function Header() {
                     alt="logo"
                 />
             </Link>
-
+            <Link href="/Feed">
+                <Option>Feed</Option>
+            </Link>
             <Link href="/UsersList">
                 <Option>Usuários</Option>
             </Link>

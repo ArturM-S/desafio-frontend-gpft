@@ -6,4 +6,8 @@ export const Container = styled.button`
     background-color: #fec111;
     border-radius: 5px;
     border: none;
+    cursor: pointer;
+    :hover {
+        filter: brightness(1.2);
+    }
 `;
