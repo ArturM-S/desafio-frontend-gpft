@@ -25,6 +25,7 @@ export default function Home() {
                 <LoginForm onSubmit={handleSubmit(onSubmit)}>
                     <Input
                         name="login"
+                        type="email"
                         placeholder="Insira seu email"
                         label="Email"
                         onChange={e => setLogin(e.target.value)}

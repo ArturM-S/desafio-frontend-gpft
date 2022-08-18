@@ -54,6 +54,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
                 setPermission(true);
             } else {
                 setPermission(false);
+                push('/');
+                alert('Você precisa fazeer login com um email');
             }
         };
         handlePermission(username);

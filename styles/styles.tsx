@@ -14,6 +14,7 @@ export const globalStyles = (
                 font-size: 16px;
                 line-height: 200%;
                 background-color: #222;
+                color: #fff;
             }
         `}
     />

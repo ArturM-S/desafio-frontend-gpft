@@ -3,10 +3,6 @@ import { AuthContext } from '../../contexts/AuthContext';
 
 export default function UsersList() {
     const { permission } = useContext(AuthContext);
-    console.log(
-        '🚀 ~ file: index.tsx ~ line 6 ~ UsersList ~ permission',
-        permission,
-    );
 
     return (
         <div>
