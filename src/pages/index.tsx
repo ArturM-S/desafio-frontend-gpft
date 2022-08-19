@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../contexts/AuthContext';
@@ -33,7 +32,7 @@ export default function Home() {
                         required
                     />
 
-                    <Button type="submit">Login</Button>
+                    <Button type="submit">Entrar</Button>
                 </LoginForm>
             </LoginBox>
         </Container>

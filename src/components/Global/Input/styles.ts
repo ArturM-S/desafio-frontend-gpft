@@ -45,6 +45,12 @@ export const InputBase = styled.input`
     &::placeholder {
         color: #cfcfcf;
     }
+    :invalid {
+        border: 2px dashed red;
+        :focus {
+            background-color: red;
+        }
+    }
 `;
 
 export const Label = styled.label`

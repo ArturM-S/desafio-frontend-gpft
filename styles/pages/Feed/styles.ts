@@ -33,7 +33,9 @@ export const Post = styled.div`
     }
 `;
 
-export const PostTitle = styled.h1``;
+export const PostTitle = styled.h2`
+    max-width: 100%;
+`;
 
 export const PostBody = styled.h3`
     padding: 8px;

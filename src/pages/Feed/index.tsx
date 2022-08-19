@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import { AuthContext } from '../../contexts/AuthContext';
 import { usePosts } from '../../../hooks/usePosts';
 import {
@@ -14,6 +15,7 @@ import {
     PostTitle,
 } from '../../../styles/pages/Feed/styles';
 import { Button } from '../../components/Global/Button';
+import { Title } from '../../../styles/styles';
 
 export default function Feed() {
     const { isAuthenticated } = useContext(AuthContext);
@@ -22,6 +24,7 @@ export default function Feed() {
     const [commentsData, setCommentsDta] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isContainerOpen, setIsContainerOpen] = useState(true);
+    const { push } = useRouter();
 
     useEffect(() => {
         fetch(`https://jsonplaceholder.typicode.com/posts/${postId}/comments`)
@@ -37,7 +40,10 @@ export default function Feed() {
             {isAuthenticated ? (
                 <>
                     <Container isContainerOpen={isContainerOpen}>
-                        <h1>Feed:</h1>
+                        <Title>Feed:</Title>
+                        <Button onClick={() => push('/CreatePost')}>
+                            Criar post
+                        </Button>
                         {data?.map(post => (
                             <Post key={post.id}>
                                 <PostAuthor>Autor: {post.userId}</PostAuthor>
@@ -90,7 +96,7 @@ export default function Feed() {
                     </CommentsModal>
                 </>
             ) : (
-                <h1>Permissão negada</h1>
+                <Title>Permissão negada</Title>
             )}
         </div>
     );

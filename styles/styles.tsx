@@ -1,4 +1,5 @@
 import { css, Global } from '@emotion/react';
+import styled from '@emotion/styled';
 
 export const globalStyles = (
     <Global
@@ -19,3 +20,5 @@ export const globalStyles = (
         `}
     />
 );
+
+export const Title = styled.h1``;

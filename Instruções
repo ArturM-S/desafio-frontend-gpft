@@ -1,0 +1,19 @@
+Desafio Frontend gpft:
+
+Stack:
+NextJS,
+Typescript,
+Emotion,
+
+Features:
+Tela de login,
+Permissões,
+Feed de posts,
+Detalhes do post,
+Comentários de cada post,
+Criação de post,
+Listagem de usuários sob Permissões;
+Layout responsivo.
+
+Bugs:
+Para realizar o login, é preciso inserir o email válido, clicar em 'entrar', fechar a caixa de dialogo e clicar em 'entrar' novamente

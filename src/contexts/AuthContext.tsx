@@ -11,6 +11,7 @@ interface AuthContextData {
     isLoading: boolean;
     isAuthenticated: boolean;
     permission: boolean;
+    username: string;
 }
 
 interface AuthProviderProps {
@@ -57,7 +58,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }, [users]);
     return (
         <AuthContext.Provider
-            value={{ signIn, isLoading, isAuthenticated, permission }}
+            value={{ signIn, isLoading, isAuthenticated, permission, username }}
         >
             {children}
         </AuthContext.Provider>
