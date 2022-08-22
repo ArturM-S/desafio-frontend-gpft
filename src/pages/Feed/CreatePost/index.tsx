@@ -1,30 +1,33 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Container, PostForm } from '../../../styles/pages/CreatePost/styles';
-import { Title } from '../../../styles/styles';
-import { Button } from '../../components/Global/Button';
-import { Input } from '../../components/Global/Input';
-import { AuthContext } from '../../contexts/AuthContext';
+import {
+    Container,
+    PostForm,
+} from '../../../../styles/pages/CreatePost/styles';
+import { Title } from '../../../../styles/styles';
+import { Button } from '../../../components/Global/Button';
+import { Input } from '../../../components/Global/Input';
+import { AuthContext } from '../../../contexts/AuthContext';
 
 export default function CreatePost() {
     const [title, setTitle] = useState(null);
     const [body, setBody] = useState(null);
     const { register, handleSubmit } = useForm();
-    const { username } = useContext(AuthContext);
+    const { username, loggedUser } = useContext(AuthContext);
     console.log(username);
 
-    const data = {
+    const formData = {
         title,
         body,
-        userId: username,
+        userId: loggedUser.id,
     };
 
-    const onSubmit = () => {
-        if (data) {
-            fetch('https://jsonplaceholder.typicode.com/posts', {
+    const onSubmit = async () => {
+        if (formData) {
+            await fetch('https://jsonplaceholder.typicode.com/posts', {
                 method: 'POST',
                 body: JSON.stringify({
-                    data,
+                    formData,
                 }),
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',

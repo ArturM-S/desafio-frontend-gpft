@@ -1,5 +1,8 @@
 import styled from '@emotion/styled';
 
+interface IShowInfoProps {
+    isShowInfo: boolean;
+}
 interface ICommentsModalProps {
     isModalOpen: boolean;
 }
@@ -33,6 +36,8 @@ export const Post = styled.div`
     }
 `;
 
+export const PostUser = styled.div``;
+
 export const PostTitle = styled.h2`
     max-width: 100%;
 `;
@@ -45,7 +50,26 @@ export const PostBody = styled.h3`
     background-color: #6666;
 `;
 
+export const AutorInfoContainer = styled.div<IShowInfoProps>`
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0px;
+    left: 0;
+    display: ${props => (props.isShowInfo ? 'flex' : 'none')};
+    flex-direction: column;
+    align-items: center;
+    backdrop-filter: blur(10px);
+    padding-top: 32px;
+    gap: 8px;
+    overflow: none;
+`;
+
 export const PostAuthor = styled.h2`
+    padding: 24px 32px;
+    border-radius: 5px;
+    border: 1px solid #515151;
+    background-color: #222;
     color: #cfcfcf;
 `;
 

@@ -12,6 +12,14 @@ interface AuthContextData {
     isAuthenticated: boolean;
     permission: boolean;
     username: string;
+    loggedUser: {
+        email: string;
+        id: number;
+        name: string;
+        phone: string;
+        username: string;
+        website: string;
+    };
 }
 
 interface AuthProviderProps {
@@ -27,6 +35,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     const [users, setUsers] = useState([]);
     const [permission, setPermission] = useState(false);
     const [username, setUsername] = useState('');
+    const [loggedUser, setLoggedUser] = useState({});
 
     const signIn = async (credentials: ISignInData) => {
         setIsLoading(true);
@@ -47,6 +56,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
     };
 
     useEffect(() => {
+        const saveUserCredentials = async () => {
+            setLoggedUser(users.find(user => user.email === username));
+        };
+        saveUserCredentials();
+        console.log(loggedUser);
+
         const handlePermission = async (login: string) => {
             if (login.includes('.tv')) {
                 setPermission(true);
@@ -55,10 +70,17 @@ export function AuthProvider({ children }: AuthProviderProps) {
             }
         };
         handlePermission(username);
-    }, [users]);
+    }, [users, username]);
     return (
         <AuthContext.Provider
-            value={{ signIn, isLoading, isAuthenticated, permission, username }}
+            value={{
+                signIn,
+                isLoading,
+                isAuthenticated,
+                permission,
+                username,
+                loggedUser,
+            }}
         >
             {children}
         </AuthContext.Provider>

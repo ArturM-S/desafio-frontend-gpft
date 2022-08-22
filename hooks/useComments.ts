@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query';
 
-type Comments = {
+type Comment = {
     postId: number;
     id: number;
     name: string;
@@ -9,7 +9,7 @@ type Comments = {
 };
 
 type GetCommentsResponse = {
-    comment: Comments[];
+    comments: Comment[];
 };
 
 export async function getComments(
